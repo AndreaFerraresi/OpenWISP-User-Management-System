@@ -41,7 +41,7 @@ class HouseKeeperWorker < BackgrounDRb::MetaWorker
   end
 
   def external_command_for_new_accounts
-    command = Configuration.get('external_command_for_new_accounts')
+    command = Settings.get('external_command_for_new_accounts')
 
     unless command.blank?
       new_accounts = User.registered_yesterday

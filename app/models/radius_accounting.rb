@@ -132,7 +132,7 @@ class RadiusAccounting < ActiveRecord::Base
   ## Read
 
   def acct_start_time
-    if Configuration.get('local_time_radius_accounting') == 'true'
+    if Settings.get('local_time_radius_accounting') == 'true'
       self.AcctStartTime - Time.now().utc_offset
     else
       self.AcctStartTime
@@ -140,7 +140,7 @@ class RadiusAccounting < ActiveRecord::Base
   end
 
   def acct_stop_time
-    if Configuration.get('local_time_radius_accounting') == 'true'
+    if Settings.get('local_time_radius_accounting') == 'true'
       self.AcctStopTime.nil? ? nil : self.AcctStopTime - Time.now().utc_offset
     else
       self.AcctStopTime

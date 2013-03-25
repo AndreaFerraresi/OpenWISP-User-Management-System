@@ -207,7 +207,7 @@ class User < AccountCommon
 
   def registration_expire_timeout
     if self.disabled?
-      Configuration.get('disabled_account_expire_days').to_i.days
+      Settings.get('disabled_account_expire_days').to_i.days
     else
       Rails.logger.error("Account not disabled")
       raise "Account not disabled"

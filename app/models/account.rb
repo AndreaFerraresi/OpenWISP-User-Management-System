@@ -152,8 +152,8 @@ class Account < AccountCommon
   def encrypted_verify_with_credit_card(return_url, notify_url)
     prepared = prepare_paypal_payment(return_url, notify_url)
 
-    prepared[:values].merge!({:cert_id => Configuration.get("ipn_cert_id")})
-    prepared[:values].merge!({:secret => Configuration.get("ipn_shared_secret")})
+    prepared[:values].merge!({:cert_id => Settings.get("ipn_cert_id")})
+    prepared[:values].merge!({:secret => Settings.get("ipn_shared_secret")})
 
     paypal_cert = File.read("#{Rails.root}/certs/paypal_cert.pem")
     owums_cert = File.read("#{Rails.root}/certs/owums_cert.pem")
@@ -181,12 +181,12 @@ class Account < AccountCommon
   private
 
   def set_username_if_required
-    if Configuration.get('use_mobile_phone_as_username')
+    if Settings.get('use_mobile_phone_as_username')
       Rails.logger.warn "Deprecation warning: 'use_mobile_phone_as_username' configuration key will be soon removed. Please use 'use_automatic_username' instead"
     end
 
     # Retro-compatibility...  "use_mobile_phone_as_username" is deprecated
-    if Configuration.get('use_automatic_username') == "true" or Configuration.get('use_mobile_phone_as_username') == "true"
+    if Settings.get('use_automatic_username') == "true" or Settings.get('use_mobile_phone_as_username') == "true"
       if verify_with_mobile_phone?
         self.username = mobile_phone
       else
@@ -198,7 +198,7 @@ class Account < AccountCommon
 
   def prepare_paypal_payment(return_url, notify_url)
     values = {
-        :business => Configuration.get("credit_card_business_account"),
+        :business => Settings.get("credit_card_business_account"),
         :cmd => '_cart',
         :upload => 1,
         :return => return_url,
@@ -210,16 +210,16 @@ class Account < AccountCommon
 
 
     values.merge!({
-                      "amount_1" => Configuration.get("credit_card_verification_cost"),
+                      "amount_1" => Settings.get("credit_card_verification_cost"),
                       "item_name_1" => I18n.t(:credit_card_item_name),
                       "item_number_1" => self.id,
                       "quantity_1" => 1
                   })
 
     if Rails.env.production?
-      paypal_base_url = Configuration.get("ipn_url")
+      paypal_base_url = Settings.get("ipn_url")
     else
-      paypal_base_url = Configuration.get("sandbox_ipn_url")
+      paypal_base_url = Settings.get("sandbox_ipn_url")
     end
 
     {:paypal_base_url => paypal_base_url, :values => values}

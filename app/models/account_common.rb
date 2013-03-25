@@ -148,7 +148,7 @@ class AccountCommon < ActiveRecord::Base
   end
 
   def self.self_verification_methods
-    Configuration.get("credit_card_enabled") == "true" ? [VERIFY_BY_MOBILE, VERIFY_BY_CREDIT_CARD] : [VERIFY_BY_MOBILE]
+    Settings.get("credit_card_enabled") == "true" ? [VERIFY_BY_MOBILE, VERIFY_BY_CREDIT_CARD] : [VERIFY_BY_MOBILE]
   end
 
   # Instance Methods
@@ -198,9 +198,9 @@ class AccountCommon < ActiveRecord::Base
       raise "Account already verified"
     else
       if self.verify_with_mobile_phone?
-        Configuration.get('mobile_phone_registration_expire').to_i
+        Settings.get('mobile_phone_registration_expire').to_i
       elsif self.verify_with_credit_card?
-        Configuration.get('credit_card_registration_expire').to_i
+        Settings.get('credit_card_registration_expire').to_i
       else
         Rails.logger.error("Invalid verification method")
         raise "Invalid verification method"

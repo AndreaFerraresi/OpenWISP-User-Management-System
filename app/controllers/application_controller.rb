@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_if_xml_restful_enabled(params={})
-    if Configuration.get("enable_account_xml_restful_api") == "yes"
+    if Settings.get("enable_account_xml_restful_api") == "yes"
       render params
     else
       render :xml => { :error => 'disabled' }, :status => :unauthorized

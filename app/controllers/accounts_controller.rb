@@ -49,7 +49,7 @@ class AccountsController < ApplicationController
     @countries = Country.all
     @mobile_prefixes = MobilePrefix.all
 
-    @account.radius_groups << RadiusGroup.find_by_name!(Configuration.get('default_radius_group'))
+    @account.radius_groups << RadiusGroup.find_by_name!(Settings.get('default_radius_group'))
 
     @account.captcha_verification = session[:captcha]
 
@@ -215,7 +215,7 @@ class AccountsController < ApplicationController
     # I know this method is verbose but, since 
     # it is very important for it to be secure,
     # clarity is preferred to geekiness :D
-    if params.has_key?(:secret) and params[:secret] == Configuration.get("ipn_shared_secret")
+    if params.has_key?(:secret) and params[:secret] == Settings.get("ipn_shared_secret")
       if params.has_key? :invoice
         user = User.find params[:invoice]
 
@@ -226,7 +226,7 @@ class AccountsController < ApplicationController
   end
 
   def instructions
-    @custom_instructions = Configuration.get('custom_account_instructions')
+    @custom_instructions = Settings.get('custom_account_instructions')
   end
 
   private
@@ -236,7 +236,7 @@ class AccountsController < ApplicationController
   end
 
   def sort_and_paginate_accountings
-    items_per_page = Configuration.get('default_radacct_results_per_page')
+    items_per_page = Settings.get('default_radacct_results_per_page')
 
     sort = case params[:sort]
              when 'acct_start_time'         then "AcctStartTime"

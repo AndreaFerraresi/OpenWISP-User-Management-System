@@ -26,11 +26,11 @@ class ConfigurationsController < ApplicationController
   end
 
   def edit
-    @configuration = Configuration.find(params[:id])
+    @configuration = Settings.find(params[:id])
   end
 
   def update
-    @configuration = Configuration.find(params[:id])
+    @configuration = Settings.find(params[:id])
     if @configuration.update_attributes(params[:configuration])
       flash[:notice] = I18n.t(:Configuration_key_updated)
       redirect_to configurations_path
@@ -40,7 +40,7 @@ class ConfigurationsController < ApplicationController
   end
 
   def index
-    @configurations = Configuration.order("configurations.key")
+    @configurations = Settings.order("configurations.key")
   end
 
 end

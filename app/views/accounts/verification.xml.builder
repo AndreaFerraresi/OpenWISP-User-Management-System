@@ -6,7 +6,7 @@ xml.account do
     xml.verification do
       if @account.verification_method == Account::VERIFY_BY_MOBILE
         xml.numbers do
-          Configuration.get('verification_numbers').split(',').map{|n| n.strip}.each do |number|
+          Settings.get('verification_numbers').split(',').map{|n| n.strip}.each do |number|
             xml.number number
           end
         end

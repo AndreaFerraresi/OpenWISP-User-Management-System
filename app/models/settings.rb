@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class Configuration < ActiveRecord::Base
+class Settings < ActiveRecord::Base
 
   validates_presence_of :key
   validates_format_of :key, :with => /\A[a-z_\.,]+\Z/
@@ -23,15 +23,15 @@ class Configuration < ActiveRecord::Base
   attr_accessible :key, :value, :system_key
 
   def self.get(key)
-    res = Configuration.find_by_key(key)
+    res = Settings.find_by_key(key)
     res.nil? ? nil : res.value
   end
 
   def self.set(key, value)
-    if prev = Configuration.find_by_key(key)
+    if prev = Settings.find_by_key(key)
       prev.set(value)
     else
-      Configuration.new(:key => key, :value => value).save!
+      Settings.new(:key => key, :value => value).save!
     end
   end
 

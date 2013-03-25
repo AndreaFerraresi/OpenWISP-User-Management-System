@@ -35336,7 +35336,7 @@ dictionary_5180:
   RecommendedHelper: 
   Format: 
   id: "5180"
-  Attribute: Juniper-Allow-Configuration
+  Attribute: Juniper-Allow-Settings
   Value: 
   RecommendedOP: 
   RecommendedTable: 
@@ -35402,7 +35402,7 @@ dictionary_5181:
   RecommendedHelper: 
   Format: 
   id: "5181"
-  Attribute: Juniper-Deny-Configuration
+  Attribute: Juniper-Deny-Settings
   Value: 
   RecommendedOP: 
   RecommendedTable: 
@@ -60923,7 +60923,7 @@ dictionary_3992:
   Format: 
   id: "3992"
   Attribute: Acc-Acct-On-Off-Reason
-  Value: Configuration-Reset
+  Value: Settings-Reset
   RecommendedOP: 
   RecommendedTable: 
   Type: 
@@ -60989,7 +60989,7 @@ dictionary_3993:
   Format: 
   id: "3993"
   Attribute: Acc-Acct-On-Off-Reason
-  Value: Configuration-Reload
+  Value: Settings-Reload
   RecommendedOP: 
   RecommendedTable: 
   Type: 
@@ -62682,7 +62682,7 @@ dictionary_896:
   RecommendedHelper: 
   Format: 
   id: "896"
-  Attribute: USR-Policy-Configuration
+  Attribute: USR-Policy-Settings
   Value: 
   RecommendedOP: 
   RecommendedTable: 
@@ -74486,7 +74486,7 @@ dictionary_3893:
   Format: 
   id: "3893"
   Attribute: Acc-Reason-Code
-  Value: Configuration-disallowed
+  Value: Settings-disallowed
   RecommendedOP: 
   RecommendedTable: 
   Type: 
@@ -87487,7 +87487,7 @@ dictionary_3793:
   RecommendedHelper: 
   Format: 
   id: "3793"
-  Attribute: Configuration-Token
+  Attribute: Settings-Token
   Value: 
   RecommendedOP: 
   RecommendedTable: 

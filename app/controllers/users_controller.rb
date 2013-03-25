@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new(:eula_acceptance => true, :privacy_acceptance => true, :state => 'Italy', :verification_method => User.verification_methods.first)
     @user.verified = true
-    @user.radius_groups = [RadiusGroup.find_by_name!(Configuration.get(:default_radius_group))]
+    @user.radius_groups = [RadiusGroup.find_by_name!(Settings.get(:default_radius_group))]
 
     @countries = Country.all
     @mobile_prefixes = MobilePrefix.all
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
 
     # Parameter anti-tampering
     unless current_operator.has_role? 'users_manager'
-      @user.radius_groups = [RadiusGroup.find_by_name!(Configuration.get(:default_radius_group))]
+      @user.radius_groups = [RadiusGroup.find_by_name!(Settings.get(:default_radius_group))]
       @user.verified = @user.active = true
     end
 
@@ -178,7 +178,7 @@ class UsersController < ApplicationController
   end
 
   def sort_and_paginate_accountings
-    items_per_page = Configuration.get('default_radacct_results_per_page')
+    items_per_page = Settings.get('default_radacct_results_per_page')
 
     sort = case params[:sort]
              when 'acct_start_time' then
@@ -220,7 +220,7 @@ class UsersController < ApplicationController
   end
 
   def sort_and_paginate_users
-    items_per_page = Configuration.get('default_user_search_results_per_page')
+    items_per_page = Settings.get('default_user_search_results_per_page')
 
     sort = case params[:sort]
              when 'registered_at' then
