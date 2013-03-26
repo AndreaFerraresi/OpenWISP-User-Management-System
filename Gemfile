@@ -1,11 +1,8 @@
 source :gemcutter
 
-gem 'rails', '3.0.18'
+gem 'rails', :git => 'git://github.com/rails/rails.git', :branch => '3-0-stable' 
 gem 'mysql2', '~> 0.3.11'
 gem 'activerecord-mysql2-adapter', '~> 0.0.3'
-gem 'activerecord', '~> 3.0.18'
-gem 'activesupport', '~> 3.0.18'
-gem 'actionpack', '~> 3.0.7'
 gem 'rack', '~> 1.2.8'
 gem 'rdoc', '~> 3.12.1'
 gem 'json', '~> 1.6.7'
